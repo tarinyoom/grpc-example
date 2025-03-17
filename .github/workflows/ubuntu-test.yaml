@@ -1,4 +1,4 @@
-name: Build and Test
+name: Ubuntu Test
 
 on:
   push:
@@ -8,11 +8,7 @@ on:
 
 jobs:
   build:
-    strategy:
-      matrix:
-        os: [ubuntu-latest, windows-latest]
-
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v4
