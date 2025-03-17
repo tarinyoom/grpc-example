@@ -9,21 +9,11 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    container: ghcr.io/tarinyoom/grpc-conan:latest
 
     steps:
-    - uses: actions/checkout@v4
+      - name: Configure CMake
+        run: cmake -B build -S . -DCMAKE_BUILD_TYPE=Release
 
-    - name: Install Conan
-      run: pip install conan
-
-    - name: Detect Conan Profile
-      run: conan profile detect --force
-
-    - name: Conan install
-      run: conan install . --output-folder=build --build=missing
-
-    - name: Configure CMake
-      run: cmake -B build -S . -DCMAKE_BUILD_TYPE=Release
-
-    - name: Build
-      run: cmake --build build --config Release
+      - name: Build
+        run: cmake --build build --config Release
