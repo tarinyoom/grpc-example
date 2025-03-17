@@ -15,12 +15,11 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
+      - name: Conan install
+        run: conan install . --output-folder=build --build=missing
+
       - name: Configure CMake
-        working-directory: ${{ github.workspace }}
-        run: cmake -B build -S . \
-          -DCMAKE_BUILD_TYPE=Release \
-          -DCMAKE_PREFIX_PATH=${{ github.workspace }}/build
+        run: cmake -B build -S . -DCMAKE_BUILD_TYPE=Release
 
       - name: Build
-        working-directory: ${{ github.workspace }}
         run: cmake --build build --config Release
