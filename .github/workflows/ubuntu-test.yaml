@@ -9,12 +9,14 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    container: ghcr.io/tarinyoom/grpc-conan:latest
 
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
+      - name: Install Conan
+        run: pip install conan
+        
       - name: Detect Conan Profile
         run: conan profile detect --force
         
